@@ -3,11 +3,20 @@ from pyrogram import Client, filters
 # Replace with your bot token
 API_TOKEN = "6028376714:AAF_S5pCavnAzUjDqtEGNucoOKPKIuI0KEw"
 
+# Replace with your API ID and API hash
+API_ID = "23830477"
+API_HASH = "19f8365d98fb11c9cd6c1eaa8b1fa4b8"
+
 # Replace with the owner's user ID (integer, not a username)
 OWNER_USER_ID = 6408116706
 
 # Create a Pyrogram client
-app = Client("my_bot", bot_token=API_TOKEN)
+app = Client(
+    "my_bot",
+    bot_token=API_TOKEN,
+    api_id=API_ID,
+    api_hash=API_HASH
+)
 
 
 # Function to delete messages in a channel
