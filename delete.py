@@ -1,4 +1,4 @@
-from pyrogram import Client, Filters
+from pyrogram import Client, filters
 
 # Replace with your bot token
 API_TOKEN = "6028376714:AAF_S5pCavnAzUjDqtEGNucoOKPKIuI0KEw"
@@ -20,12 +20,11 @@ def delete_channel_messages(client, chat_id):
 
 
 # Define a command to start the bot
-@app.on_message(Filters.command("start") & Filters.private)
+@app.on_message(filters.command("start") & filters.private)
 def start(client, message):
     message.reply_text("Bot is now running. It will delete upcoming messages in the channel.")
 
 
 # Run the bot
 if __name__ == "__main__":
-    with app:
-        app.run()
+    app.run(delete_channel_messages)
