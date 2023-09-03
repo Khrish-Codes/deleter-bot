@@ -11,20 +11,20 @@ app = Client("my_bot", bot_token=API_TOKEN)
 
 
 # Function to delete messages in a channel
-def delete_channel_messages(client, chat_id):
-    messages = client.iter_history(chat_id)
-    for message in messages:
+async def delete_channel_messages():
+    async for message in app.iter_history("YOUR_CHANNEL_USERNAME"):
         # Check if the message is not from the bot owner
         if message.from_user and message.from_user.id != OWNER_USER_ID:
-            message.delete()
+            await message.delete()
 
 
 # Define a command to start the bot
 @app.on_message(filters.command("start") & filters.private)
-def start(client, message):
-    message.reply_text("Bot is now running. It will delete upcoming messages in the channel.")
+async def start(client, message):
+    await message.reply_text("Bot is now running. It will delete upcoming messages in the channel.")
 
 
 # Run the bot
 if __name__ == "__main__":
-    app.run(delete_channel_messages)
+    with app:
+        app.run(delete_channel_messages)
